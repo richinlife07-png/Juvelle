@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { X, ArrowLeft, Check } from 'lucide-react';
 import Button from '../ui/Button.jsx';
 
-export default function AuthModal({ open, onClose }) {
+export default function AuthModal({ open, onClose, onAuthSuccess }) {
   const [view, setView] = useState('signin'); // signin, signup, forgot
   const [recoveryMethod, setRecoveryMethod] = useState('link'); // link, qr
   const [formData, setFormData] = useState({
@@ -65,6 +65,18 @@ export default function AuthModal({ open, onClose }) {
 
     // Simulate API call
     setSuccess(true);
+    
+    // Save auth state if remember me is checked
+    if (formData.remember) {
+      localStorage.setItem('juvelle_auth', JSON.stringify({
+        email: formData.email,
+        timestamp: Date.now()
+      }));
+    }
+    
+    if (onAuthSuccess) {
+      setTimeout(() => onAuthSuccess(), 1000);
+    }
   };
 
   const handleChange = (e) => {
@@ -109,7 +121,7 @@ export default function AuthModal({ open, onClose }) {
               {view === 'signup' && 'Welcome to Juvelle! Your account is ready to go.'}
               {view === 'forgot' && 'Check your phone for a text with a link to reset your password.'}
             </p>
-            <Button icon={false} onClick={handleClose}>Done</Button>
+            <Button icon={false} onClick={() => { handleClose(); if (onAuthSuccess) onAuthSuccess(); }}>Done</Button>
           </div>
         )}
 

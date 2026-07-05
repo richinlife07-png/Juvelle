@@ -1,9 +1,9 @@
 import React from 'react';
 import { PRICING } from '../../data/content.js';
 import Button from '../ui/Button.jsx';
-import { Check, Star, Gem, GraduationCap } from 'lucide-react';
+import { Check, Star, Gem, GraduationCap, Camera } from 'lucide-react';
 
-export default function Pricing() {
+export default function Pricing({ onBookConsultation, onPayment }) {
   return (
     <section id="pricing" className="pricing">
       <div className="container">
@@ -31,7 +31,7 @@ export default function Pricing() {
                 </li>
               ))}
             </ul>
-            <Button icon={false} variant="ghost" className="pricing-cta">
+            <Button icon={false} variant="ghost" className="pricing-cta" onClick={onBookConsultation}>
               {PRICING.plans.free.cta}
             </Button>
           </div>
@@ -58,7 +58,7 @@ export default function Pricing() {
                 </li>
               ))}
             </ul>
-            <Button icon={false} className="pricing-cta">
+            <Button icon={false} className="pricing-cta" onClick={() => onPayment('plus')}>
               {PRICING.plans.plus.cta}
             </Button>
           </div>
@@ -81,7 +81,7 @@ export default function Pricing() {
                 </li>
               ))}
             </ul>
-            <Button icon={false} variant="ghost" className="pricing-cta">
+            <Button icon={false} variant="ghost" className="pricing-cta" onClick={() => onPayment('pro')}>
               {PRICING.plans.pro.cta}
             </Button>
           </div>
@@ -110,6 +110,9 @@ export default function Pricing() {
             <span className="price-amount">${PRICING.lifetime.price}</span>
             <span className="price-period">one-time</span>
           </div>
+          <Button icon={false} className="lifetime-cta" onClick={() => onPayment('lifetime')}>
+            Get it!
+          </Button>
         </div>
       </div>
 
@@ -305,6 +308,16 @@ export default function Pricing() {
         .lifetime-offer .price-period {
           font-size: 14px;
           color: rgba(255, 255, 255, 0.8);
+        }
+        .lifetime-cta {
+          margin-top: 20px;
+          width: 100%;
+          justify-content: center;
+          background: var(--color-bg);
+          color: var(--color-ink);
+        }
+        .lifetime-cta:hover {
+          background: rgba(255, 255, 255, 0.9);
         }
       `}</style>
     </section>

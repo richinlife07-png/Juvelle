@@ -32,8 +32,8 @@ export default function Hero({ onBookConsultation }) {
         </div>
       </div>
 
-      <div className="hero-art" role="img" aria-label="Illustration of a tidy desk with a notebook, mug, laptop and plant">
-        <DeskIllustration />
+      <div className="hero-art" role="img" aria-label="Photo of a tidy desk with a notebook, mug, laptop and plant">
+        <img src="/desk-photo.png" alt="Desk with notebook, mug, laptop and plant" />
       </div>
 
       <style>{`
